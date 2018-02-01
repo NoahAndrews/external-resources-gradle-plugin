@@ -1,0 +1,35 @@
+group 'org.openftc.gradle'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.9.9"
+    }
+}
+
+apply plugin: "com.gradle.plugin-publish"
+apply plugin: 'java'
+
+version = "0.9"
+group = "org.openftc.ftcresourcesplugin"
+
+pluginBundle {
+    website = 'https://' // TODO: Finish publishing
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    google()
+}
+
+dependencies {
+    compile gradleApi()
+    compileOnly 'com.android.tools.build:gradle:3.0.1'
+}
