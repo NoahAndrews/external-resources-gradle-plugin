@@ -15,11 +15,21 @@ buildscript {
 apply plugin: "com.gradle.plugin-publish"
 apply plugin: 'java'
 
-version = "0.9"
+version = "0.95"
 group = "org.openftc.ftcresourcesplugin"
 
 pluginBundle {
-    website = 'https://' // TODO: Finish publishing
+    website = 'https://github.com/OpenFTC/external-resources-gradle-plugin'
+    vcsUrl = 'https://github.com/OpenFTC/external-resources-gradle-plugin'
+    description = 'A Gradle plugin to push files to the FIRST folder of all connected Android devices (FTC Teams only)'
+    tags = ['android', 'robotics', 'first', 'ftc', 'openftc']
+
+    plugins {
+        'ftcResourcesPlugin' {
+            id = 'org.openftc.ftc-resources-plugin'
+            displayName = 'FTC External Resources plugin'
+        }
+    }
 }
 
 sourceCompatibility = 1.8

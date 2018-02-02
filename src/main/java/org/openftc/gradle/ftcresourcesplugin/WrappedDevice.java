@@ -1,18 +1,7 @@
 package org.openftc.gradle.ftcresourcesplugin;
 
 import com.android.annotations.NonNull;
-import com.android.ddmlib.AdbCommandRejectedException;
-import com.android.ddmlib.Client;
-import com.android.ddmlib.FileListingService;
-import com.android.ddmlib.IDevice;
-import com.android.ddmlib.IShellOutputReceiver;
-import com.android.ddmlib.InstallException;
-import com.android.ddmlib.RawImage;
-import com.android.ddmlib.ScreenRecorderOptions;
-import com.android.ddmlib.ShellCommandUnresponsiveException;
-import com.android.ddmlib.SyncException;
-import com.android.ddmlib.SyncService;
-import com.android.ddmlib.TimeoutException;
+import com.android.ddmlib.*;
 import com.android.ddmlib.log.LogReceiver;
 import com.android.sdklib.AndroidVersion;
 
@@ -20,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -123,7 +113,6 @@ public class WrappedDevice extends GroovyObjectSupport implements IDevice, Groov
     /**
      * Convenience method that attempts to retrieve a property via
      * {@link #getSystemProperty(String)} with a very short wait time, and swallows exceptions.
-     * <p>
      * <p><em>Note: Prefer using {@link #getSystemProperty(String)} if you want control over the
      * timeout.</em>
      *
@@ -229,7 +218,7 @@ public class WrappedDevice extends GroovyObjectSupport implements IDevice, Groov
     }
 
     /**
-     * Returns whether the {@link Device} has {@link Client}s.
+     * Returns whether the {@link IDevice} has {@link Client}s.
      */
     @Override
     public boolean hasClients() {
